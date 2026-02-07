@@ -289,7 +289,13 @@ Provide a complete, accurate transcription with natural paragraph breaks."""
             
             # Download
             print("  → Downloading...")
-            resp = requests.get(audio_url, stream=True, timeout=300)
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'audio/mpeg,audio/*;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Referer': 'https://www.buzzsprout.com/'
+            }
+            resp = requests.get(audio_url, stream=True, timeout=300, headers=headers)
             resp.raise_for_status()
             
             with open(temp_path, "wb") as f:
